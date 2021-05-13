@@ -1,0 +1,22 @@
+<div class="row">
+    {{#each data}}
+        <div class="card col-md-3">
+            <div class="card-header">Id: <b>{{id}}</b> UID: <a href="/admin/user/{{uid}}">{{uid}}</a> <small>{{title}}</small></div>
+            <div class="card-body">
+        <a href="/files/images/{{path}}" target="_blank">
+            {{#if contentType}}
+                <video src="/files/videos/{{path}}" controls style='width: 100%;'></video> 
+            {{else}}
+                <img src="/files/images/{{path}}" style='width: 100%;'>
+            {{/if}}         
+
+                </a>
+                <br/><br/>
+                <small class="muted">{{dateFormat date "D.M.Y, H:mm"}}</small><br/>
+                <a href="/admin/images/delete/{{id}}" class="btn btn-danger btn-sm"><i
+                        class="fa fa-trash"></i> Удалить</a>
+            </div>
+        </div>
+    {{/each}}
+</div>
+{{{pagination}}}

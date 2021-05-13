@@ -1,0 +1,196 @@
+<style type="text/css">
+    .tostline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+    .tost {
+        margin-top: 10px;
+    }
+</style>
+<h1>Dashboard</h1>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex p-10 no-block">
+                    <div class="align-slef-center">
+                        <h2 class="m-b-0">{{ count.saved }}</h2>
+                        <h6 class="text-muted m-b-0">Сохранений</h6>
+                    </div>
+                    <div class="align-self-center display-6 ml-auto"><i class="text-success fa fa-save"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                     aria-valuemax="100" style="width:100%; height:3px;"><span class="sr-only">50% Complete</span></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex p-10 no-block">
+                    <div class="align-slef-center">
+                        <h2 class="m-b-0">{{ count.subscribes }}</h2>
+                        <h6 class="text-muted m-b-0">Подписок</h6>
+                    </div>
+                    <div class="align-self-center display-6 ml-auto"><i class="text-success fa fa-users"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                     aria-valuemax="100" style="width:100%; height:3px;"><span class="sr-only">50% Complete</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+<br/><br/>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">Управление</div>
+            <div class="card-body">
+                <a href="/admin/images/moderation">Модерация ({{ count.moderContent }})</a>
+                <hr/>
+                <a href="/admin/users-list">Пользователи ({{ count.users }})</a><br/>
+                <a href="/admin/images/list">Картинки ({{ count.images }})</a><br/>
+                <a href="/admin/images/stat">Статистика по парсерам</a>
+                <!--                <hr/>-->
+                <!--                <a href="">Сохраненные ({{ count.saved }})</a><br/>-->
+                <!--                <a href="">Подписки ({{ count.subscribes }})</a><br/>-->
+            </div>
+        </div>
+    </div>
+</div>
+<br/><br/>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Конфигурация уведомлений</div>
+            <div class="card-body">
+                <form method="POST" action="/admin">
+                    <input type="text" name="titleNotify" class="form-control" placeholder="Заголовок сообщения" value="{{ titleForm }}" style="margin-bottom: 10px;">
+                    <input type="text" name="contentNotify" class="form-control" placeholder="Текст сообщения" value="{{ contentForm }}" style="margin-bottom: 10px;">
+                    <input type="number" name="push" class="form-control" placeholder="В какой час дня отправлять" value="{{ push }}">
+                    <br/>
+                    <input type="submit" class="btn btn-primary btn-block" value="Установить">
+
+                </form>
+                <form action="/admin/file" method="post" enctype="multipart/form-data">
+                    <label>Фотография уведомления маленькая сбоку</label><br>
+                    <img src="/files/images/{{ icon }}"><br><br>
+                    <input type="file" name="filedata" /><br><br>
+                    <input type="submit" value="Отправить" class="btn btn-primary btn-block" />
+                </form>
+                <form action="/admin/fileSecond" method="post" enctype="multipart/form-data">
+                    <label>Фотография уведомления большая</label><br>
+                    <img src="/files/images/{{ iconSecond }}"><br><br>
+                    <input type="file" name="filedata" /><br><br>
+                    <input type="submit" value="Отправить" class="btn btn-primary btn-block" />
+                </form>		
+                <a href="/admin/sendnotification" class="btn mt-3 btn-primary btn-block">Отправить уведомление</a>
+            </div>
+        </div>
+    </div>
+        <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">Конфигурация парсеров</div>
+            <div class="card-body">
+                <span>Настройка парсера Kekfeed</span>
+                <form method="POST" action="/admin" style="display: flex; justify-content: space-between; align-items: center;">
+                    <input type="number" name="KekfeedАm" class="form-control" placeholder="Количество объявлений" value="{{ KekfeedАm }}" style="margin-right: 10px;">
+                    <input type="number" name="Kekfeed" class="form-control" placeholder="Через какое время" value="{{ Kekfeed }}" style="margin-right: 10px;">
+                    <br/>
+                    <input type="submit" class="btn btn-primary btn-block" value="Установить">
+                </form>
+                <br>
+
+                <span>Настройка парсера Айдаприкола</span>
+                <form method="POST"  action="/admin" style="display: flex; justify-content: space-between; align-items: center;">
+                    <input type="number" name="idpАm" class="form-control" placeholder="Количество объявлений" value="{{ idpАm }}" style="margin-right: 10px;">
+                    <input type="number" name="idp" class="form-control" placeholder="Через какое время" value="{{ idp }}" style="margin-right: 10px;">
+                    <br/>
+                    <input type="submit" class="btn btn-primary btn-block" value="Установить">
+                </form>
+                 <br>
+
+                <span>Настройка парсера TikTok</span>
+                <form method="POST"  action="/admin" style="display: flex; justify-content: space-between; align-items: center;">
+                    <input type="text" name="TikTokTag" class="form-control" placeholder="Тэг" style="margin-right: 10px;">
+                    <input type="text" name="TikTokAm" class="form-control" placeholder="Количество" style="margin-right: 10px;">
+                    <input type="text" name="TikTokID" class="form-control" placeholder="id пользователя" style="margin-right: 10px;">
+                    <input type="number" name="TikTokTime" class="form-control" placeholder="Через какое время" style="margin-right: 10px;">
+                    <br/>
+                    <input type="submit" class="btn btn-primary btn-block" value="Установить">
+                </form>
+                <hr>
+                <span>Хэштэги:</span>
+                 {{#each TikToklist}}
+                <div class="tost">
+                <div class="Tag tostline">Тэг по которому парситься <span class="badge badge-secondary">{{this.tag}}</span></div>
+                <div class="time tostline"> Через какое время парситься <span class="badge badge-secondary">{{this.time}}</span></div>
+                <div class="Am tostline">Количество записей <span class="badge badge-secondary">{{this.am}}</span></div>
+                <div class="personid tostline">Id пользователя к которому добавляется<span class="badge badge-secondary">{{this.personid}}</span></div>
+                <a href="/admin/del/{{this.id}}" class="btn btn-danger btn-block">Удалить</a>
+                </div>
+                  {{/each}}
+
+
+
+                <span>Настройка парсера Instagram</span>
+                <form method="POST"  action="/admin" style="display: flex; justify-content: space-between; align-items: center;">
+                    <input type="text" name="InstaTag" class="form-control" placeholder="Тэг" style="margin-right: 10px;">
+                    <input type="text" name="InstaID" class="form-control" placeholder="id пользователя" style="margin-right: 10px;">
+                    <input type="number" name="InstaTime" class="form-control" placeholder="Через какое время" style="margin-right: 10px;">
+                    <br/>
+                    <input type="submit" class="btn btn-primary btn-block" value="Установить">
+                </form>
+                <hr>
+                <span>Хэштэги:</span>
+                 {{#each Instalist}}
+                <div class="tost">
+                <div class="Tag tostline">Тэг по которому парситься <span class="badge badge-secondary">{{this.TAG}}</span></div>
+                <div class="time tostline"> Через какое время парситься <span class="badge badge-secondary">{{this.TIME}}</span></div>
+                
+                <div class="personid tostline">Id пользователя к которому добавляется<span class="badge badge-secondary">{{this.PERSONID}}</span></div>
+                <a href="/admin/delinst/{{this.ID}}" class="btn btn-danger btn-block">Удалить</a>
+                </div>
+                  {{/each}}
+                 
+
+                <span>Настройка парсера Vk</span>
+                <form method="POST"  action="/admin" style="display: flex; justify-content: space-between; align-items: center;">
+                    <input type="text" name="VkTag" class="form-control" placeholder="Тэг" style="margin-right: 10px;">
+                    <input type="text" name="VkID" class="form-control" placeholder="id пользователя" style="margin-right: 10px;">
+                    <input type="number" name="VkTime" class="form-control" placeholder="Через какое время" style="margin-right: 10px;">
+                    <input type="number" name="VkAmount" class="form-control" placeholder="Сколько" style="margin-right: 10px;">
+                    <br/>
+                    <input type="submit" class="btn btn-primary btn-block" value="Установить">
+                </form>
+                <hr>
+                <span>Хэштэги:</span>
+                 {{#each Vklist}}
+                <div class="tost">
+                <div class="Tag tostline">Тэг по которому парситься <span class="badge badge-secondary">{{this.publictag}}</span></div>
+                <div class="time tostline"> Через какое время парситься <span class="badge badge-secondary">{{this.time}}</span></div>
+                <div class="Am tostline">Количество записей <span class="badge badge-secondary">{{this.amount}}</span></div>
+                <div class="personid tostline">Id пользователя к которому добавляется<span class="badge badge-secondary">{{this.id_user}}</span></div>
+                <a href="/admin/delvk/{{this.id}}" class="btn btn-danger btn-block">Удалить</a>
+                </div>
+                  {{/each}}
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/admin">MemoAdmin</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            {{#if isAuth}}
+<!--                <li><a class="nav-link {{#if isAdd}}active{{/if}}" href="/add">Добавить</a></li>-->
+
+                <li><a class="btn btn-outline-danger my-2 my-lg-0" href="/admin/logout">Выйти</a></li>
+            {{else}}
+                <a class="btn btn-outline-success my-2 my-lg-0" href="/admin/login">Войти</a>
+            {{/if}}
+        </ul>
+    </div>
+</nav>
+<br/>
+
+
+
+
+
+
+
+
